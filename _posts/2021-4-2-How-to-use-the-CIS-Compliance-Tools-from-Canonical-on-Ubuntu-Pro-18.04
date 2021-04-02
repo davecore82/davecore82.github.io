@@ -3,7 +3,6 @@ layout: post
 title: How to use the CIS Compliance Tools from Canonical on Ubuntu Pro 18.04
 ---
 
-# How to use the CIS Compliance Tools from Canonical on Ubuntu Pro 18.04
 ![](https://miro.medium.com/max/1271/1*caKlXtEF1f5MXn9iw0JfFg.jpeg)
 Ubuntu Pro on  [AWS](https://ubuntu.com/aws/pro)  and  [Azure](https://ubuntu.com/azure/pro)  (and now on  [Google Cloud](https://ubuntu.com/gcp/pro)  too!) comes with the Ubuntu Advantage client that allows users to enable features of  [Ubuntu Advantage](https://ubuntu.com/advantage).
 
