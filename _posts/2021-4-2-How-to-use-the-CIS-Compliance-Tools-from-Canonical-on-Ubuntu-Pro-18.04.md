@@ -27,7 +27,7 @@ ubuntu@ip-172-31-53-238:~$ ua version
 26.2~18.04.1
 ```
 
-Once you have the UA client version 26.2 enabled, you can run ua status with the  `--all`  flag and see the cis feature:
+Once you have the UA client version 26.2 enabled, you can run ua status with the `--all` flag and see the cis feature:
 
 ```
 ubuntu@bionicpro:~$ ua status --all  
@@ -43,7 +43,7 @@ livepatch     yes       enabled   Canonical Livepatch service
 
 Note: It’s possible you might not see cis. On AWS, where I had to update the UA client, I couldn’t see cis, but the next step worked anyway.
 
-Now you’re ready to enable CIS with the`--beta`flag:
+Now you’re ready to enable CIS with the `--beta` flag:
 
 ```
 ubuntu@bionicpro:~$ sudo ua enable cis --beta  
