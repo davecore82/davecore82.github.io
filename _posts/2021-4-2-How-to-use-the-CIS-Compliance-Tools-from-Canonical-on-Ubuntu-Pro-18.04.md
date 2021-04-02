@@ -3,11 +3,11 @@ layout: post
 title: How to use the CIS Compliance Tools from Canonical on Ubuntu Pro 18.04
 ---
 
+Here’s a quick guide on how to use the CIS beta feature to enable the CIS compliance tools from Canonical on Ubuntu Pro 18.04.
+
 ![](https://miro.medium.com/max/1271/1*caKlXtEF1f5MXn9iw0JfFg.jpeg)
 
 Ubuntu Pro on  [AWS](https://ubuntu.com/aws/pro)  and  [Azure](https://ubuntu.com/azure/pro)  (and now on  [Google Cloud](https://ubuntu.com/gcp/pro)  too!) comes with the Ubuntu Advantage client that allows users to enable features of  [Ubuntu Advantage](https://ubuntu.com/advantage).
-
-Here’s a quick guide on how to use the CIS beta feature to enable the CIS compliance tools from Canonical on Ubuntu Pro 18.04.
 
 The first step is to launch an Ubuntu Pro 18.04 instance. I tested this procedure with both Azure and AWS. You can find the different Ubuntu Pro releases in the marketplace of each cloud.
 
@@ -21,7 +21,9 @@ ubuntu@bionicpro:~$ ua version
 You want to be running at least version 26.2. If you have a lower version, you’ll want to add the  [UA Client Stable PPA from Launchpad](https://launchpad.net/~ua-client/+archive/ubuntu/stable)  and upgrade your UA packages:
 
 ```
-ubuntu@ip-172-31-53-238:~$ sudo add-apt-repository ppa:ua-client/stableubuntu@ip-172-31-53-238:~$ sudo apt install ubuntu-advantage-tools ubuntu-advantage-proubuntu@ip-172-31-53-238:~$ ua version  
+ubuntu@ip-172-31-53-238:~$ sudo add-apt-repository ppa:ua-client/stable
+ubuntu@ip-172-31-53-238:~$ sudo apt install ubuntu-advantage-tools ubuntu-advantage-pro
+ubuntu@ip-172-31-53-238:~$ ua version  
 26.2~18.04.1
 ```
 
