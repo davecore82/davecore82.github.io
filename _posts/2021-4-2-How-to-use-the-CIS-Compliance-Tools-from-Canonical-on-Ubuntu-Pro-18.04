@@ -5,6 +5,8 @@ title: How to use the CIS Compliance Tools from Canonical on Ubuntu Pro 18.04
 
 After launching an Ubuntu Pro 18.04 instance, check the version of the UA client:
 
-    ubuntu@bionicpro:~$ ua version  
-    26.2~18.04.1
+```
+ubuntu@bionicpro:~$ ua version  
+26.2~18.04.1
+```
 
