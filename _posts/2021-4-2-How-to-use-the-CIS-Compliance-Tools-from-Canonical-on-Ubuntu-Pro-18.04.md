@@ -13,14 +13,14 @@ The first step is to launch an Ubuntu Pro 18.04 instance. I tested this procedur
 
 After launching an Ubuntu Pro 18.04 instance, check the version of the UA client:
 
-```
+```console
 $ ua version  
 26.2~18.04.1
 ```
 
 You want to be running at least version 26.2. If you have a lower version, you’ll want to add the  [UA Client Stable PPA from Launchpad](https://launchpad.net/~ua-client/+archive/ubuntu/stable)  and upgrade your UA packages:
 
-```
+```console
 $ sudo add-apt-repository ppa:ua-client/stable
 $ sudo apt install ubuntu-advantage-tools ubuntu-advantage-pro
 $ ua version  
@@ -29,7 +29,7 @@ $ ua version
 
 Once you have the UA client version 26.2 enabled, you can run ua status with the `--all` flag and see the cis feature:
 
-```
+```console
 $ ua status --all  
 SERVICE       ENTITLED  STATUS    DESCRIPTION  
 cc-eal        yes       n/a       Common Criteria EAL2 Provisioning Packages  
@@ -45,7 +45,7 @@ Note: It’s possible you might not see cis. On AWS, where I had to update the U
 
 Now you’re ready to enable CIS with the `--beta` flag:
 
-```
+```console
 $ sudo ua enable cis --beta  
 One moment, checking your subscription first  
 Updating package lists  
@@ -55,7 +55,7 @@ CIS Audit enabled
 
 You can confirm that the usg packages have been installed:
 
-```
+```console
 $ dpkg -l | grep usg  
 ii  usg-cisbenchmark                       18.04.12                                    all          SCAP content for CIS Ubuntu Benchmarks  
 ii  usg-common                             18.04.12                                    all          The CPE files for Ubuntu SCAP Content
