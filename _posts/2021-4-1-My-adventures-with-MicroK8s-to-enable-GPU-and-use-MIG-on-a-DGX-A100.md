@@ -19,5 +19,5 @@ In summary, the steps were the following:
  8. Create the GPU slices
 
 Check out my post on the Kubernetes discuss forum for more details:
-https://discuss.kubernetes.io/t/my-adventures-with-microk8s-to-enable-gpu-and-use-mig-on-a-dgx-a100/15366
+[https://discuss.kubernetes.io/t/my-adventures-with-microk8s-to-enable-gpu-and-use-mig-on-a-dgx-a100/15366](https://discuss.kubernetes.io/t/my-adventures-with-microk8s-to-enable-gpu-and-use-mig-on-a-dgx-a100/15366)
 
