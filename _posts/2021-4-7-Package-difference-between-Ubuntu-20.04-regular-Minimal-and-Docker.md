@@ -1,0 +1,2207 @@
+---
+layout: post
+title: Package difference in Ubuntu 20.04 between regular and Minimal cloud images and Docker image
+---
+
+In 2018, Canonical introduced a smaller Minimal Ubuntu cloud image, available on the public clouds. Canonical says in the [introductory blog article](https://ubuntu.com/blog/minimal-ubuntu-released) that Minimal Ubuntu is less than 50% the size of the standard Ubuntu server image and boots up to 40% faster. There's also an Ubuntu 20.04 Docker image that is even smaller as one would expect. Here's a comparison of the packages found in a regular Ubuntu 20.04 cloud image on AWS versus a Minimal Ubuntu 20.04 and an Ubuntu 20.04 Docker container.
+
+I generated these packages lists on April 7th 2021 by launching the two flavors of Ubuntu in AWS, as well as launching an ubuntu:20.04 container on my laptop.
+
+I also compared the sizes of the images:
+
+ - `docker images` shows the ubuntu:20.04 image weighing at 72.9MB. 
+ - `df -h /` inside an Ubuntu Minimal 20.04 instance on AWS reports 899M
+ - `df -h /` inside a regular Ubuntu 20.04 instance on AWS reports 1.3G
+
+Here is a diff of the packages in the Ubuntu Minimal 20.04 cloud image on AWS versus the regular Ubuntu 20.04 cloud image, also on AWS:
+
+```diff
++accountsservice
+ acpid
+ adduser
+ alsa-topology-conf
+ alsa-ucm-conf
+ amd64-microcode
+ apparmor
+ apport
++apport-symptoms
+ apt
++apt-utils
+ at
+ base-files
+ base-passwd
+ bash
++bash-completion
+ bc
+ bcache-tools
++bind9-dnsutils
++bind9-host
++bind9-libs:amd64
+ bolt
++bsdmainutils
+ bsdutils
+ btrfs-progs
+ busybox-initramfs
++busybox-static
++byobu
+ bzip2
+ ca-certificates
+ cloud-guest-utils
+ cloud-init
++cloud-initramfs-copymods
++cloud-initramfs-dyn-netconf
++command-not-found
++console-setup
++console-setup-linux
+ coreutils
+ cpio
++cron
+ cryptsetup
+ cryptsetup-bin
++cryptsetup-initramfs
+ cryptsetup-run
+ curl
+ dash
+ dbus
+ dbus-user-session
+ dconf-gsettings-backend:amd64
+ dconf-service
+ debconf
++debconf-i18n
+ debianutils
+ diffutils
+ dirmngr
+ distro-info-data
+ dmeventd
++dmidecode
+ dmsetup
++dosfstools
+ dpkg
+ e2fsprogs
+ eatmydata
+ ec2-hibinit-agent
+ ec2-instance-connect
++ed
++eject
+ ethtool
+ fdisk
++file
+ finalrd
+ findutils
+ fonts-ubuntu-console
++friendly-recovery
++ftp
+ fuse
++fwupd
++fwupd-signed
+ gawk
+ gcc-10-base:amd64
+ gdisk
+ gettext-base
+ gir1.2-glib-2.0:amd64
+ gir1.2-packagekitglib-1.0
++git
++git-man
+ glib-networking:amd64
+ glib-networking-common
+ glib-networking-services
+ gnupg
+ gnupg-l10n
+ gnupg-utils
+ gpg
+ gpg-agent
+ gpg-wks-client
+ gpg-wks-server
+ gpgconf
+ gpgsm
+ gpgv
+ grep
+ groff-base
+ grub-common
+ grub-gfxpayload-lists
+ grub-pc
+ grub-pc-bin
+ grub2-common
+ gsettings-desktop-schemas
+ gzip
++hdparm
+ hibagent
+ hostname
+ htop
++info
++init
+ init-system-helpers
+ initramfs-tools
+ initramfs-tools-bin
+ initramfs-tools-core
++install-info
+ intel-microcode
+ iproute2
++iptables
++iputils-ping
++iputils-tracepath
++irqbalance
+ isc-dhcp-client
+ isc-dhcp-common
++iso-codes
+ iucode-tool
++kbd
++keyboard-configuration
+ klibc-utils
+ kmod
+ kpartx
+ krb5-locales
++landscape-common
++language-selector-common
++less
++libaccountsservice0:amd64
+ libacl1:amd64
+ libaio1:amd64
+ libapparmor1:amd64
++libappstream4:amd64
+ libapt-pkg6.0:amd64
++libarchive13:amd64
+ libargon2-1:amd64
+ libasn1-8-heimdal:amd64
++libasound2:amd64
++libasound2-data
+ libassuan0:amd64
+ libatm1:amd64
+ libattr1:amd64
+ libaudit-common
+ libaudit1:amd64
+ libblkid1:amd64
+ libbrotli1:amd64
+ libbsd0:amd64
+ libbz2-1.0:amd64
+ libc-bin
+ libc6:amd64
++libcanberra0:amd64
+ libcap-ng0:amd64
+ libcap2:amd64
+ libcap2-bin
+ libcbor0.6:amd64
+ libcom-err2:amd64
+ libcrypt1:amd64
+ libcryptsetup12:amd64
++libcurl3-gnutls:amd64
+ libcurl4:amd64
+ libdb5.3:amd64
+ libdbus-1-3:amd64
+ libdconf1:amd64
+ libdebconfclient0:amd64
+ libdevmapper-event1.02.1:amd64
+ libdevmapper1.02.1:amd64
+ libdns-export1109
++libdrm-common
++libdrm2:amd64
+ libeatmydata1:amd64
+ libedit2:amd64
+ libefiboot1:amd64
+ libefivar1:amd64
+ libelf1:amd64
++liberror-perl
++libestr0:amd64
++libevent-2.1-7:amd64
+ libexpat1:amd64
+ libext2fs2:amd64
++libfastjson4:amd64
+ libfdisk1:amd64
+ libffi7:amd64
+ libfido2-1:amd64
+ libfl2:amd64
+ libfreetype6:amd64
++libfribidi0:amd64
+ libfuse2:amd64
++libfwupd2:amd64
++libfwupdplugin1:amd64
++libgcab-1.0-0:amd64
+ libgcc-s1:amd64
+ libgcrypt20:amd64
+ libgdbm-compat4:amd64
+ libgdbm6:amd64
+ libgirepository-1.0-1:amd64
+ libglib2.0-0:amd64
++libglib2.0-bin
+ libglib2.0-data
+ libgmp10:amd64
+ libgnutls30:amd64
+ libgpg-error0:amd64
++libgpgme11:amd64
+ libgpm2:amd64
+ libgssapi-krb5-2:amd64
+ libgssapi3-heimdal:amd64
++libgstreamer1.0-0:amd64
++libgudev-1.0-0:amd64
++libgusb2:amd64
+ libhcrypto4-heimdal:amd64
+ libheimbase1-heimdal:amd64
+ libheimntlm0-heimdal:amd64
+ libhogweed5:amd64
+ libhx509-5-heimdal:amd64
+ libicu66:amd64
+ libidn2-0:amd64
+ libip4tc2:amd64
++libip6tc2:amd64
+ libisc-export1105:amd64
+ libisns0:amd64
+ libjson-c4:amd64
++libjson-glib-1.0-0:amd64
++libjson-glib-1.0-common
+ libk5crypto3:amd64
+ libkeyutils1:amd64
+ libklibc:amd64
+ libkmod2:amd64
+ libkrb5-26-heimdal:amd64
+ libkrb5-3:amd64
+ libkrb5support0:amd64
+ libksba8:amd64
+ libldap-2.4-2:amd64
+ libldap-common
++liblmdb0:amd64
+ liblocale-gettext-perl
++libltdl7:amd64
+ liblvm2cmd2.03:amd64
+ liblz4-1:amd64
+ liblzma5:amd64
+ liblzo2-2:amd64
++libmagic-mgc
++libmagic1:amd64
++libmaxminddb0:amd64
+ libmnl0:amd64
+ libmount1:amd64
+ libmpdec2:amd64
+ libmpfr6:amd64
++libmspack0:amd64
+ libncurses6:amd64
+ libncursesw6:amd64
++libnetfilter-conntrack3:amd64
+ libnetplan0:amd64
+ libnettle7:amd64
++libnewt0.52:amd64
++libnfnetlink0:amd64
++libnftnl11:amd64
+ libnghttp2-14:amd64
+ libnpth0:amd64
+ libnss-systemd:amd64
++libntfs-3g883
++libnuma1:amd64
++libogg0:amd64
+ libp11-kit0:amd64
+ libpackagekit-glib2-18:amd64
+ libpam-cap:amd64
+ libpam-modules:amd64
+ libpam-modules-bin
+ libpam-runtime
+ libpam-systemd:amd64
+ libpam0g:amd64
++libparted2:amd64
++libpcap0.8:amd64
++libpci3:amd64
+ libpcre2-8-0:amd64
+ libpcre3:amd64
+ libperl5.30:amd64
++libpipeline1:amd64
++libplymouth5:amd64
+ libpng16-16:amd64
++libpolkit-agent-1-0:amd64
+ libpolkit-gobject-1-0:amd64
+ libpopt0:amd64
+ libprocps8:amd64
+ libproxy1v5:amd64
+ libpsl5:amd64
+ libpython3-stdlib:amd64
++libpython3.8:amd64
+ libpython3.8-minimal:amd64
+ libpython3.8-stdlib:amd64
+ libreadline5:amd64
+ libreadline8:amd64
+ libroken18-heimdal:amd64
+ librtmp1:amd64
+ libsasl2-2:amd64
+ libsasl2-modules:amd64
+ libsasl2-modules-db:amd64
+ libseccomp2:amd64
+ libselinux1:amd64
+ libsemanage-common
+ libsemanage1:amd64
+ libsepol1:amd64
+ libsgutils2-2
+ libsigsegv2:amd64
++libslang2:amd64
+ libsmartcols1:amd64
++libsmbios-c2
++libsodium23:amd64
++libsoup2.4-1:amd64
+ libsqlite3-0:amd64
+ libss2:amd64
+ libssh-4:amd64
+ libssl1.1:amd64
+ libstdc++6:amd64
++libstemmer0d:amd64
+ libsystemd0:amd64
+ libtasn1-6:amd64
++libtdb1:amd64
++libtext-charwidth-perl
++libtext-iconv-perl
++libtext-wrapi18n-perl
+ libtinfo6:amd64
++libtss2-esys0
+ libuchardet0:amd64
+ libudev1:amd64
+ libunistring2:amd64
++libunwind8:amd64
++liburcu6:amd64
++libusb-1.0-0:amd64
++libutempter0:amd64
+ libuuid1:amd64
++libuv1:amd64
++libvorbis0a:amd64
++libvorbisfile3:amd64
+ libwind0-heimdal:amd64
+ libwrap0:amd64
++libx11-6:amd64
++libx11-data
++libxau6:amd64
++libxcb1:amd64
++libxdmcp6:amd64
++libxext6:amd64
++libxml2:amd64
++libxmlb1:amd64
++libxmlsec1:amd64
++libxmlsec1-openssl:amd64
++libxmuu1:amd64
++libxslt1.1:amd64
+ libxtables12:amd64
+ libyaml-0-2:amd64
+ libzstd1:amd64
+ linux-aws
+ linux-aws-headers-5.4.0-1041
+ linux-base
+ linux-headers-5.4.0-1041-aws
+ linux-headers-aws
+ linux-image-5.4.0-1041-aws
+ linux-image-aws
+ linux-modules-5.4.0-1041-aws
++locales
+ login
++logrotate
+ logsave
+ lsb-base
+ lsb-release
++lshw
++lsof
++ltrace
+ lvm2
+ lxd-agent-loader
+-lxd-installer
+ lz4
++man-db
++manpages
+ mawk
+ mdadm
+ microcode-initrd
+ mime-support
+ motd-news-config
+ mount
++mtr-tiny
++multipath-tools
++nano
+ ncurses-base
+ ncurses-bin
++ncurses-term
+ netbase
++netcat-openbsd
+ netplan.io
+ networkd-dispatcher
++ntfs-3g
+ open-iscsi
++open-vm-tools
+ openssh-client
+ openssh-server
+ openssh-sftp-server
+ openssl
+ os-prober
++overlayroot
++packagekit
++packagekit-tools
++parted
+ passwd
++pastebinit
+ patch
++pci.ids
++pciutils
+ perl
+ perl-base
+ perl-modules-5.30
+ pinentry-curses
++plymouth
++plymouth-theme-ubuntu-text
++policykit-1
+ pollinate
++popularity-contest
++powermgmt-base
+ procps
++psmisc
++publicsuffix
+ python-apt-common
+ python3
+ python3-apport
+ python3-apt
+ python3-attr
++python3-automat
+ python3-blinker
+ python3-certifi
+ python3-cffi-backend
+ python3-chardet
++python3-click
++python3-colorama
++python3-commandnotfound
+ python3-configobj
++python3-constantly
+ python3-cryptography
+ python3-dbus
+ python3-debconf
+ python3-debian
+ python3-distro
+ python3-distro-info
+ python3-distupgrade
+ python3-distutils
+ python3-entrypoints
++python3-gdbm:amd64
+ python3-gi
++python3-hamcrest
+ python3-httplib2
++python3-hyperlink
+ python3-idna
+ python3-importlib-metadata
++python3-incremental
+ python3-jinja2
+ python3-json-pointer
+ python3-jsonpatch
+ python3-jsonschema
+ python3-jwt
+ python3-keyring
+ python3-launchpadlib
+ python3-lazr.restfulclient
+ python3-lazr.uri
+ python3-lib2to3
+ python3-markupsafe
+ python3-minimal
+ python3-more-itertools
++python3-nacl
+ python3-netifaces
++python3-newt:amd64
+ python3-oauthlib
+ python3-openssl
+ python3-pexpect
+ python3-pkg-resources
+ python3-problem-report
+ python3-ptyprocess
++python3-pyasn1
++python3-pyasn1-modules
++python3-pymacaroons
+ python3-pyrsistent:amd64
+ python3-requests
+ python3-requests-unixsocket
+ python3-secretstorage
+ python3-serial
++python3-service-identity
+ python3-setuptools
+ python3-simplejson
+ python3-six
++python3-software-properties
+ python3-systemd
++python3-twisted
++python3-twisted-bin:amd64
+ python3-update-manager
+ python3-urllib3
+ python3-wadllib
+ python3-yaml
+ python3-zipp
++python3-zope.interface
+ python3.8
+ python3.8-minimal
+ readline-common
++rsync
++rsyslog
++run-one
+ sbsigntool
++screen
+ secureboot-db
+ sed
+ sensible-utils
+ sg3-utils
++sg3-utils-udev
++shared-mime-info
+ snapd
++software-properties-common
+ sosreport
+ sound-theme-freedesktop
+ squashfs-tools
+ ssh-import-id
++strace
+ sudo
+ systemd
+ systemd-sysv
+ systemd-timesyncd
+ sysvinit-utils
+ tar
++tcpdump
++telnet
+ thin-provisioning-tools
++time
++tmux
+ tpm-udev
+ tzdata
++ubuntu-advantage-tools
+ ubuntu-keyring
++ubuntu-minimal
+ ubuntu-release-upgrader-core
++ubuntu-server
++ubuntu-standard
+ ucf
+ udev
++ufw
+ unattended-upgrades
+ update-manager-core
+ update-notifier-common
++usb.ids
++usbutils
+ util-linux
++uuid-runtime
++vim
++vim-common
++vim-runtime
++vim-tiny
+ wget
++whiptail
++xauth
++xdg-user-dirs
+ xfsprogs
++xkb-data
+ xxd
+ xz-utils
+ zerofree
+ zlib1g:amd64
+```
+
+Here is a diff of the packages in the ubuntu:20.04 image versus the regular Ubuntu 20.04 cloud image on AWS:
+
+```diff
++accountsservice
++acpid
+ adduser
++alsa-topology-conf
++alsa-ucm-conf
++amd64-microcode
++apparmor
++apport
++apport-symptoms
+ apt
++apt-utils
++at
+ base-files
+ base-passwd
+ bash
++bash-completion
++bc
++bcache-tools
++bind9-dnsutils
++bind9-host
++bind9-libs:amd64
++bolt
++bsdmainutils
+ bsdutils
++btrfs-progs
++busybox-initramfs
++busybox-static
++byobu
+ bzip2
++ca-certificates
++cloud-guest-utils
++cloud-init
++cloud-initramfs-copymods
++cloud-initramfs-dyn-netconf
++command-not-found
++console-setup
++console-setup-linux
+ coreutils
++cpio
++cron
++cryptsetup
++cryptsetup-bin
++cryptsetup-initramfs
++cryptsetup-run
++curl
+ dash
++dbus
++dbus-user-session
++dconf-gsettings-backend:amd64
++dconf-service
+ debconf
++debconf-i18n
+ debianutils
+ diffutils
++dirmngr
++distro-info-data
++dmeventd
++dmidecode
++dmsetup
++dosfstools
+ dpkg
+ e2fsprogs
++eatmydata
++ec2-hibinit-agent
++ec2-instance-connect
++ed
++eject
++ethtool
+ fdisk
++file
++finalrd
+ findutils
++fonts-ubuntu-console
++friendly-recovery
++ftp
++fuse
++fwupd
++fwupd-signed
++gawk
+ gcc-10-base:amd64
++gdisk
++gettext-base
++gir1.2-glib-2.0:amd64
++gir1.2-packagekitglib-1.0
++git
++git-man
++glib-networking:amd64
++glib-networking-common
++glib-networking-services
++gnupg
++gnupg-l10n
++gnupg-utils
++gpg
++gpg-agent
++gpg-wks-client
++gpg-wks-server
++gpgconf
++gpgsm
+ gpgv
+ grep
++groff-base
++grub-common
++grub-gfxpayload-lists
++grub-pc
++grub-pc-bin
++grub2-common
++gsettings-desktop-schemas
+ gzip
++hdparm
++hibagent
+ hostname
++htop
++info
++init
+ init-system-helpers
++initramfs-tools
++initramfs-tools-bin
++initramfs-tools-core
++install-info
++intel-microcode
++iproute2
++iptables
++iputils-ping
++iputils-tracepath
++irqbalance
++isc-dhcp-client
++isc-dhcp-common
++iso-codes
++iucode-tool
++kbd
++keyboard-configuration
++klibc-utils
++kmod
++kpartx
++krb5-locales
++landscape-common
++language-selector-common
++less
++libaccountsservice0:amd64
+ libacl1:amd64
++libaio1:amd64
++libapparmor1:amd64
++libappstream4:amd64
+ libapt-pkg6.0:amd64
++libarchive13:amd64
++libargon2-1:amd64
++libasn1-8-heimdal:amd64
++libasound2:amd64
++libasound2-data
++libassuan0:amd64
++libatm1:amd64
+ libattr1:amd64
+ libaudit-common
+ libaudit1:amd64
+ libblkid1:amd64
++libbrotli1:amd64
++libbsd0:amd64
+ libbz2-1.0:amd64
+ libc-bin
+ libc6:amd64
++libcanberra0:amd64
+ libcap-ng0:amd64
++libcap2:amd64
++libcap2-bin
++libcbor0.6:amd64
+ libcom-err2:amd64
+ libcrypt1:amd64
++libcryptsetup12:amd64
++libcurl3-gnutls:amd64
++libcurl4:amd64
+ libdb5.3:amd64
++libdbus-1-3:amd64
++libdconf1:amd64
+ libdebconfclient0:amd64
++libdevmapper-event1.02.1:amd64
++libdevmapper1.02.1:amd64
++libdns-export1109
++libdrm-common
++libdrm2:amd64
++libeatmydata1:amd64
++libedit2:amd64
++libefiboot1:amd64
++libefivar1:amd64
++libelf1:amd64
++liberror-perl
++libestr0:amd64
++libevent-2.1-7:amd64
++libexpat1:amd64
+ libext2fs2:amd64
++libfastjson4:amd64
+ libfdisk1:amd64
+ libffi7:amd64
++libfido2-1:amd64
++libfl2:amd64
++libfreetype6:amd64
++libfribidi0:amd64
++libfuse2:amd64
++libfwupd2:amd64
++libfwupdplugin1:amd64
++libgcab-1.0-0:amd64
+ libgcc-s1:amd64
+ libgcrypt20:amd64
++libgdbm-compat4:amd64
++libgdbm6:amd64
++libgirepository-1.0-1:amd64
++libglib2.0-0:amd64
++libglib2.0-bin
++libglib2.0-data
+ libgmp10:amd64
+ libgnutls30:amd64
+ libgpg-error0:amd64
++libgpgme11:amd64
++libgpm2:amd64
++libgssapi-krb5-2:amd64
++libgssapi3-heimdal:amd64
++libgstreamer1.0-0:amd64
++libgudev-1.0-0:amd64
++libgusb2:amd64
++libhcrypto4-heimdal:amd64
++libheimbase1-heimdal:amd64
++libheimntlm0-heimdal:amd64
+ libhogweed5:amd64
++libhx509-5-heimdal:amd64
++libicu66:amd64
+ libidn2-0:amd64
++libip4tc2:amd64
++libip6tc2:amd64
++libisc-export1105:amd64
++libisns0:amd64
++libjson-c4:amd64
++libjson-glib-1.0-0:amd64
++libjson-glib-1.0-common
++libk5crypto3:amd64
++libkeyutils1:amd64
++libklibc:amd64
++libkmod2:amd64
++libkrb5-26-heimdal:amd64
++libkrb5-3:amd64
++libkrb5support0:amd64
++libksba8:amd64
++libldap-2.4-2:amd64
++libldap-common
++liblmdb0:amd64
++liblocale-gettext-perl
++libltdl7:amd64
++liblvm2cmd2.03:amd64
+ liblz4-1:amd64
+ liblzma5:amd64
++liblzo2-2:amd64
++libmagic-mgc
++libmagic1:amd64
++libmaxminddb0:amd64
++libmnl0:amd64
+ libmount1:amd64
++libmpdec2:amd64
++libmpfr6:amd64
++libmspack0:amd64
+ libncurses6:amd64
+ libncursesw6:amd64
++libnetfilter-conntrack3:amd64
++libnetplan0:amd64
+ libnettle7:amd64
++libnewt0.52:amd64
++libnfnetlink0:amd64
++libnftnl11:amd64
++libnghttp2-14:amd64
++libnpth0:amd64
++libnss-systemd:amd64
++libntfs-3g883
++libnuma1:amd64
++libogg0:amd64
+ libp11-kit0:amd64
++libpackagekit-glib2-18:amd64
++libpam-cap:amd64
+ libpam-modules:amd64
+ libpam-modules-bin
+ libpam-runtime
++libpam-systemd:amd64
+ libpam0g:amd64
++libparted2:amd64
++libpcap0.8:amd64
++libpci3:amd64
+ libpcre2-8-0:amd64
+ libpcre3:amd64
++libperl5.30:amd64
++libpipeline1:amd64
++libplymouth5:amd64
++libpng16-16:amd64
++libpolkit-agent-1-0:amd64
++libpolkit-gobject-1-0:amd64
++libpopt0:amd64
+ libprocps8:amd64
++libproxy1v5:amd64
++libpsl5:amd64
++libpython3-stdlib:amd64
++libpython3.8:amd64
++libpython3.8-minimal:amd64
++libpython3.8-stdlib:amd64
++libreadline5:amd64
++libreadline8:amd64
++libroken18-heimdal:amd64
++librtmp1:amd64
++libsasl2-2:amd64
++libsasl2-modules:amd64
++libsasl2-modules-db:amd64
+ libseccomp2:amd64
+ libselinux1:amd64
+ libsemanage-common
+ libsemanage1:amd64
+ libsepol1:amd64
++libsgutils2-2
++libsigsegv2:amd64
++libslang2:amd64
+ libsmartcols1:amd64
++libsmbios-c2
++libsodium23:amd64
++libsoup2.4-1:amd64
++libsqlite3-0:amd64
+ libss2:amd64
++libssh-4:amd64
++libssl1.1:amd64
+ libstdc++6:amd64
++libstemmer0d:amd64
+ libsystemd0:amd64
+ libtasn1-6:amd64
++libtdb1:amd64
++libtext-charwidth-perl
++libtext-iconv-perl
++libtext-wrapi18n-perl
+ libtinfo6:amd64
++libtss2-esys0
++libuchardet0:amd64
+ libudev1:amd64
+ libunistring2:amd64
++libunwind8:amd64
++liburcu6:amd64
++libusb-1.0-0:amd64
++libutempter0:amd64
+ libuuid1:amd64
++libuv1:amd64
++libvorbis0a:amd64
++libvorbisfile3:amd64
++libwind0-heimdal:amd64
++libwrap0:amd64
++libx11-6:amd64
++libx11-data
++libxau6:amd64
++libxcb1:amd64
++libxdmcp6:amd64
++libxext6:amd64
++libxml2:amd64
++libxmlb1:amd64
++libxmlsec1:amd64
++libxmlsec1-openssl:amd64
++libxmuu1:amd64
++libxslt1.1:amd64
++libxtables12:amd64
++libyaml-0-2:amd64
+ libzstd1:amd64
++linux-aws
++linux-aws-headers-5.4.0-1041
++linux-base
++linux-headers-5.4.0-1041-aws
++linux-headers-aws
++linux-image-5.4.0-1041-aws
++linux-image-aws
++linux-modules-5.4.0-1041-aws
++locales
+ login
++logrotate
+ logsave
+ lsb-base
++lsb-release
++lshw
++lsof
++ltrace
++lvm2
++lxd-agent-loader
++lz4
++man-db
++manpages
+ mawk
++mdadm
++microcode-initrd
++mime-support
++motd-news-config
+ mount
++mtr-tiny
++multipath-tools
++nano
+ ncurses-base
+ ncurses-bin
++ncurses-term
++netbase
++netcat-openbsd
++netplan.io
++networkd-dispatcher
++ntfs-3g
++open-iscsi
++open-vm-tools
++openssh-client
++openssh-server
++openssh-sftp-server
++openssl
++os-prober
++overlayroot
++packagekit
++packagekit-tools
++parted
+ passwd
++pastebinit
++patch
++pci.ids
++pciutils
++perl
+ perl-base
++perl-modules-5.30
++pinentry-curses
++plymouth
++plymouth-theme-ubuntu-text
++policykit-1
++pollinate
++popularity-contest
++powermgmt-base
+ procps
++psmisc
++publicsuffix
++python-apt-common
++python3
++python3-apport
++python3-apt
++python3-attr
++python3-automat
++python3-blinker
++python3-certifi
++python3-cffi-backend
++python3-chardet
++python3-click
++python3-colorama
++python3-commandnotfound
++python3-configobj
++python3-constantly
++python3-cryptography
++python3-dbus
++python3-debconf
++python3-debian
++python3-distro
++python3-distro-info
++python3-distupgrade
++python3-distutils
++python3-entrypoints
++python3-gdbm:amd64
++python3-gi
++python3-hamcrest
++python3-httplib2
++python3-hyperlink
++python3-idna
++python3-importlib-metadata
++python3-incremental
++python3-jinja2
++python3-json-pointer
++python3-jsonpatch
++python3-jsonschema
++python3-jwt
++python3-keyring
++python3-launchpadlib
++python3-lazr.restfulclient
++python3-lazr.uri
++python3-lib2to3
++python3-markupsafe
++python3-minimal
++python3-more-itertools
++python3-nacl
++python3-netifaces
++python3-newt:amd64
++python3-oauthlib
++python3-openssl
++python3-pexpect
++python3-pkg-resources
++python3-problem-report
++python3-ptyprocess
++python3-pyasn1
++python3-pyasn1-modules
++python3-pymacaroons
++python3-pyrsistent:amd64
++python3-requests
++python3-requests-unixsocket
++python3-secretstorage
++python3-serial
++python3-service-identity
++python3-setuptools
++python3-simplejson
++python3-six
++python3-software-properties
++python3-systemd
++python3-twisted
++python3-twisted-bin:amd64
++python3-update-manager
++python3-urllib3
++python3-wadllib
++python3-yaml
++python3-zipp
++python3-zope.interface
++python3.8
++python3.8-minimal
++readline-common
++rsync
++rsyslog
++run-one
++sbsigntool
++screen
++secureboot-db
+ sed
+ sensible-utils
++sg3-utils
++sg3-utils-udev
++shared-mime-info
++snapd
++software-properties-common
++sosreport
++sound-theme-freedesktop
++squashfs-tools
++ssh-import-id
++strace
++sudo
++systemd
++systemd-sysv
++systemd-timesyncd
+ sysvinit-utils
+ tar
++tcpdump
++telnet
++thin-provisioning-tools
++time
++tmux
++tpm-udev
++tzdata
++ubuntu-advantage-tools
+ ubuntu-keyring
++ubuntu-minimal
++ubuntu-release-upgrader-core
++ubuntu-server
++ubuntu-standard
++ucf
++udev
++ufw
++unattended-upgrades
++update-manager-core
++update-notifier-common
++usb.ids
++usbutils
+ util-linux
++uuid-runtime
++vim
++vim-common
++vim-runtime
++vim-tiny
++wget
++whiptail
++xauth
++xdg-user-dirs
++xfsprogs
++xkb-data
++xxd
++xz-utils
++zerofree
+ zlib1g:amd64
+```
+
+And here is the full list of 567 packages on regular Ubuntu 20.04 on AWS for reference:
+```
+accountsservice
+acpid
+adduser
+alsa-topology-conf
+alsa-ucm-conf
+amd64-microcode
+apparmor
+apport
+apport-symptoms
+apt
+apt-utils
+at
+base-files
+base-passwd
+bash
+bash-completion
+bc
+bcache-tools
+bind9-dnsutils
+bind9-host
+bind9-libs:amd64
+bolt
+bsdmainutils
+bsdutils
+btrfs-progs
+busybox-initramfs
+busybox-static
+byobu
+bzip2
+ca-certificates
+cloud-guest-utils
+cloud-init
+cloud-initramfs-copymods
+cloud-initramfs-dyn-netconf
+command-not-found
+console-setup
+console-setup-linux
+coreutils
+cpio
+cron
+cryptsetup
+cryptsetup-bin
+cryptsetup-initramfs
+cryptsetup-run
+curl
+dash
+dbus
+dbus-user-session
+dconf-gsettings-backend:amd64
+dconf-service
+debconf
+debconf-i18n
+debianutils
+diffutils
+dirmngr
+distro-info-data
+dmeventd
+dmidecode
+dmsetup
+dosfstools
+dpkg
+e2fsprogs
+eatmydata
+ec2-hibinit-agent
+ec2-instance-connect
+ed
+eject
+ethtool
+fdisk
+file
+finalrd
+findutils
+fonts-ubuntu-console
+friendly-recovery
+ftp
+fuse
+fwupd
+fwupd-signed
+gawk
+gcc-10-base:amd64
+gdisk
+gettext-base
+gir1.2-glib-2.0:amd64
+gir1.2-packagekitglib-1.0
+git
+git-man
+glib-networking:amd64
+glib-networking-common
+glib-networking-services
+gnupg
+gnupg-l10n
+gnupg-utils
+gpg
+gpg-agent
+gpg-wks-client
+gpg-wks-server
+gpgconf
+gpgsm
+gpgv
+grep
+groff-base
+grub-common
+grub-gfxpayload-lists
+grub-pc
+grub-pc-bin
+grub2-common
+gsettings-desktop-schemas
+gzip
+hdparm
+hibagent
+hostname
+htop
+info
+init
+init-system-helpers
+initramfs-tools
+initramfs-tools-bin
+initramfs-tools-core
+install-info
+intel-microcode
+iproute2
+iptables
+iputils-ping
+iputils-tracepath
+irqbalance
+isc-dhcp-client
+isc-dhcp-common
+iso-codes
+iucode-tool
+kbd
+keyboard-configuration
+klibc-utils
+kmod
+kpartx
+krb5-locales
+landscape-common
+language-selector-common
+less
+libaccountsservice0:amd64
+libacl1:amd64
+libaio1:amd64
+libapparmor1:amd64
+libappstream4:amd64
+libapt-pkg6.0:amd64
+libarchive13:amd64
+libargon2-1:amd64
+libasn1-8-heimdal:amd64
+libasound2:amd64
+libasound2-data
+libassuan0:amd64
+libatm1:amd64
+libattr1:amd64
+libaudit-common
+libaudit1:amd64
+libblkid1:amd64
+libbrotli1:amd64
+libbsd0:amd64
+libbz2-1.0:amd64
+libc-bin
+libc6:amd64
+libcanberra0:amd64
+libcap-ng0:amd64
+libcap2:amd64
+libcap2-bin
+libcbor0.6:amd64
+libcom-err2:amd64
+libcrypt1:amd64
+libcryptsetup12:amd64
+libcurl3-gnutls:amd64
+libcurl4:amd64
+libdb5.3:amd64
+libdbus-1-3:amd64
+libdconf1:amd64
+libdebconfclient0:amd64
+libdevmapper-event1.02.1:amd64
+libdevmapper1.02.1:amd64
+libdns-export1109
+libdrm-common
+libdrm2:amd64
+libeatmydata1:amd64
+libedit2:amd64
+libefiboot1:amd64
+libefivar1:amd64
+libelf1:amd64
+liberror-perl
+libestr0:amd64
+libevent-2.1-7:amd64
+libexpat1:amd64
+libext2fs2:amd64
+libfastjson4:amd64
+libfdisk1:amd64
+libffi7:amd64
+libfido2-1:amd64
+libfl2:amd64
+libfreetype6:amd64
+libfribidi0:amd64
+libfuse2:amd64
+libfwupd2:amd64
+libfwupdplugin1:amd64
+libgcab-1.0-0:amd64
+libgcc-s1:amd64
+libgcrypt20:amd64
+libgdbm-compat4:amd64
+libgdbm6:amd64
+libgirepository-1.0-1:amd64
+libglib2.0-0:amd64
+libglib2.0-bin
+libglib2.0-data
+libgmp10:amd64
+libgnutls30:amd64
+libgpg-error0:amd64
+libgpgme11:amd64
+libgpm2:amd64
+libgssapi-krb5-2:amd64
+libgssapi3-heimdal:amd64
+libgstreamer1.0-0:amd64
+libgudev-1.0-0:amd64
+libgusb2:amd64
+libhcrypto4-heimdal:amd64
+libheimbase1-heimdal:amd64
+libheimntlm0-heimdal:amd64
+libhogweed5:amd64
+libhx509-5-heimdal:amd64
+libicu66:amd64
+libidn2-0:amd64
+libip4tc2:amd64
+libip6tc2:amd64
+libisc-export1105:amd64
+libisns0:amd64
+libjson-c4:amd64
+libjson-glib-1.0-0:amd64
+libjson-glib-1.0-common
+libk5crypto3:amd64
+libkeyutils1:amd64
+libklibc:amd64
+libkmod2:amd64
+libkrb5-26-heimdal:amd64
+libkrb5-3:amd64
+libkrb5support0:amd64
+libksba8:amd64
+libldap-2.4-2:amd64
+libldap-common
+liblmdb0:amd64
+liblocale-gettext-perl
+libltdl7:amd64
+liblvm2cmd2.03:amd64
+liblz4-1:amd64
+liblzma5:amd64
+liblzo2-2:amd64
+libmagic-mgc
+libmagic1:amd64
+libmaxminddb0:amd64
+libmnl0:amd64
+libmount1:amd64
+libmpdec2:amd64
+libmpfr6:amd64
+libmspack0:amd64
+libncurses6:amd64
+libncursesw6:amd64
+libnetfilter-conntrack3:amd64
+libnetplan0:amd64
+libnettle7:amd64
+libnewt0.52:amd64
+libnfnetlink0:amd64
+libnftnl11:amd64
+libnghttp2-14:amd64
+libnpth0:amd64
+libnss-systemd:amd64
+libntfs-3g883
+libnuma1:amd64
+libogg0:amd64
+libp11-kit0:amd64
+libpackagekit-glib2-18:amd64
+libpam-cap:amd64
+libpam-modules:amd64
+libpam-modules-bin
+libpam-runtime
+libpam-systemd:amd64
+libpam0g:amd64
+libparted2:amd64
+libpcap0.8:amd64
+libpci3:amd64
+libpcre2-8-0:amd64
+libpcre3:amd64
+libperl5.30:amd64
+libpipeline1:amd64
+libplymouth5:amd64
+libpng16-16:amd64
+libpolkit-agent-1-0:amd64
+libpolkit-gobject-1-0:amd64
+libpopt0:amd64
+libprocps8:amd64
+libproxy1v5:amd64
+libpsl5:amd64
+libpython3-stdlib:amd64
+libpython3.8:amd64
+libpython3.8-minimal:amd64
+libpython3.8-stdlib:amd64
+libreadline5:amd64
+libreadline8:amd64
+libroken18-heimdal:amd64
+librtmp1:amd64
+libsasl2-2:amd64
+libsasl2-modules:amd64
+libsasl2-modules-db:amd64
+libseccomp2:amd64
+libselinux1:amd64
+libsemanage-common
+libsemanage1:amd64
+libsepol1:amd64
+libsgutils2-2
+libsigsegv2:amd64
+libslang2:amd64
+libsmartcols1:amd64
+libsmbios-c2
+libsodium23:amd64
+libsoup2.4-1:amd64
+libsqlite3-0:amd64
+libss2:amd64
+libssh-4:amd64
+libssl1.1:amd64
+libstdc++6:amd64
+libstemmer0d:amd64
+libsystemd0:amd64
+libtasn1-6:amd64
+libtdb1:amd64
+libtext-charwidth-perl
+libtext-iconv-perl
+libtext-wrapi18n-perl
+libtinfo6:amd64
+libtss2-esys0
+libuchardet0:amd64
+libudev1:amd64
+libunistring2:amd64
+libunwind8:amd64
+liburcu6:amd64
+libusb-1.0-0:amd64
+libutempter0:amd64
+libuuid1:amd64
+libuv1:amd64
+libvorbis0a:amd64
+libvorbisfile3:amd64
+libwind0-heimdal:amd64
+libwrap0:amd64
+libx11-6:amd64
+libx11-data
+libxau6:amd64
+libxcb1:amd64
+libxdmcp6:amd64
+libxext6:amd64
+libxml2:amd64
+libxmlb1:amd64
+libxmlsec1:amd64
+libxmlsec1-openssl:amd64
+libxmuu1:amd64
+libxslt1.1:amd64
+libxtables12:amd64
+libyaml-0-2:amd64
+libzstd1:amd64
+linux-aws
+linux-aws-headers-5.4.0-1041
+linux-base
+linux-headers-5.4.0-1041-aws
+linux-headers-aws
+linux-image-5.4.0-1041-aws
+linux-image-aws
+linux-modules-5.4.0-1041-aws
+locales
+login
+logrotate
+logsave
+lsb-base
+lsb-release
+lshw
+lsof
+ltrace
+lvm2
+lxd-agent-loader
+lz4
+man-db
+manpages
+mawk
+mdadm
+microcode-initrd
+mime-support
+motd-news-config
+mount
+mtr-tiny
+multipath-tools
+nano
+ncurses-base
+ncurses-bin
+ncurses-term
+netbase
+netcat-openbsd
+netplan.io
+networkd-dispatcher
+ntfs-3g
+open-iscsi
+open-vm-tools
+openssh-client
+openssh-server
+openssh-sftp-server
+openssl
+os-prober
+overlayroot
+packagekit
+packagekit-tools
+parted
+passwd
+pastebinit
+patch
+pci.ids
+pciutils
+perl
+perl-base
+perl-modules-5.30
+pinentry-curses
+plymouth
+plymouth-theme-ubuntu-text
+policykit-1
+pollinate
+popularity-contest
+powermgmt-base
+procps
+psmisc
+publicsuffix
+python-apt-common
+python3
+python3-apport
+python3-apt
+python3-attr
+python3-automat
+python3-blinker
+python3-certifi
+python3-cffi-backend
+python3-chardet
+python3-click
+python3-colorama
+python3-commandnotfound
+python3-configobj
+python3-constantly
+python3-cryptography
+python3-dbus
+python3-debconf
+python3-debian
+python3-distro
+python3-distro-info
+python3-distupgrade
+python3-distutils
+python3-entrypoints
+python3-gdbm:amd64
+python3-gi
+python3-hamcrest
+python3-httplib2
+python3-hyperlink
+python3-idna
+python3-importlib-metadata
+python3-incremental
+python3-jinja2
+python3-json-pointer
+python3-jsonpatch
+python3-jsonschema
+python3-jwt
+python3-keyring
+python3-launchpadlib
+python3-lazr.restfulclient
+python3-lazr.uri
+python3-lib2to3
+python3-markupsafe
+python3-minimal
+python3-more-itertools
+python3-nacl
+python3-netifaces
+python3-newt:amd64
+python3-oauthlib
+python3-openssl
+python3-pexpect
+python3-pkg-resources
+python3-problem-report
+python3-ptyprocess
+python3-pyasn1
+python3-pyasn1-modules
+python3-pymacaroons
+python3-pyrsistent:amd64
+python3-requests
+python3-requests-unixsocket
+python3-secretstorage
+python3-serial
+python3-service-identity
+python3-setuptools
+python3-simplejson
+python3-six
+python3-software-properties
+python3-systemd
+python3-twisted
+python3-twisted-bin:amd64
+python3-update-manager
+python3-urllib3
+python3-wadllib
+python3-yaml
+python3-zipp
+python3-zope.interface
+python3.8
+python3.8-minimal
+readline-common
+rsync
+rsyslog
+run-one
+sbsigntool
+screen
+secureboot-db
+sed
+sensible-utils
+sg3-utils
+sg3-utils-udev
+shared-mime-info
+snapd
+software-properties-common
+sosreport
+sound-theme-freedesktop
+squashfs-tools
+ssh-import-id
+strace
+sudo
+systemd
+systemd-sysv
+systemd-timesyncd
+sysvinit-utils
+tar
+tcpdump
+telnet
+thin-provisioning-tools
+time
+tmux
+tpm-udev
+tzdata
+ubuntu-advantage-tools
+ubuntu-keyring
+ubuntu-minimal
+ubuntu-release-upgrader-core
+ubuntu-server
+ubuntu-standard
+ucf
+udev
+ufw
+unattended-upgrades
+update-manager-core
+update-notifier-common
+usb.ids
+usbutils
+util-linux
+uuid-runtime
+vim
+vim-common
+vim-runtime
+vim-tiny
+wget
+whiptail
+xauth
+xdg-user-dirs
+xfsprogs
+xkb-data
+xxd
+xz-utils
+zerofree
+zlib1g:amd64
+```
+
+Here is the full list of 376 packages on Ubuntu Minimal 20.04 on AWS:
+```
+acpid
+adduser
+alsa-topology-conf
+alsa-ucm-conf
+amd64-microcode
+apparmor
+apport
+apt
+at
+base-files
+base-passwd
+bash
+bc
+bcache-tools
+bolt
+bsdutils
+btrfs-progs
+busybox-initramfs
+bzip2
+ca-certificates
+cloud-guest-utils
+cloud-init
+coreutils
+cpio
+cryptsetup
+cryptsetup-bin
+cryptsetup-run
+curl
+dash
+dbus
+dbus-user-session
+dconf-gsettings-backend:amd64
+dconf-service
+debconf
+debianutils
+diffutils
+dirmngr
+distro-info-data
+dmeventd
+dmsetup
+dpkg
+e2fsprogs
+eatmydata
+ec2-hibinit-agent
+ec2-instance-connect
+ethtool
+fdisk
+finalrd
+findutils
+fonts-ubuntu-console
+fuse
+gawk
+gcc-10-base:amd64
+gdisk
+gettext-base
+gir1.2-glib-2.0:amd64
+gir1.2-packagekitglib-1.0
+glib-networking:amd64
+glib-networking-common
+glib-networking-services
+gnupg
+gnupg-l10n
+gnupg-utils
+gpg
+gpg-agent
+gpg-wks-client
+gpg-wks-server
+gpgconf
+gpgsm
+gpgv
+grep
+groff-base
+grub-common
+grub-gfxpayload-lists
+grub-pc
+grub-pc-bin
+grub2-common
+gsettings-desktop-schemas
+gzip
+hibagent
+hostname
+htop
+init-system-helpers
+initramfs-tools
+initramfs-tools-bin
+initramfs-tools-core
+intel-microcode
+iproute2
+isc-dhcp-client
+isc-dhcp-common
+iucode-tool
+klibc-utils
+kmod
+kpartx
+krb5-locales
+libacl1:amd64
+libaio1:amd64
+libapparmor1:amd64
+libapt-pkg6.0:amd64
+libargon2-1:amd64
+libasn1-8-heimdal:amd64
+libassuan0:amd64
+libatm1:amd64
+libattr1:amd64
+libaudit-common
+libaudit1:amd64
+libblkid1:amd64
+libbrotli1:amd64
+libbsd0:amd64
+libbz2-1.0:amd64
+libc-bin
+libc6:amd64
+libcap-ng0:amd64
+libcap2:amd64
+libcap2-bin
+libcbor0.6:amd64
+libcom-err2:amd64
+libcrypt1:amd64
+libcryptsetup12:amd64
+libcurl4:amd64
+libdb5.3:amd64
+libdbus-1-3:amd64
+libdconf1:amd64
+libdebconfclient0:amd64
+libdevmapper-event1.02.1:amd64
+libdevmapper1.02.1:amd64
+libdns-export1109
+libeatmydata1:amd64
+libedit2:amd64
+libefiboot1:amd64
+libefivar1:amd64
+libelf1:amd64
+libexpat1:amd64
+libext2fs2:amd64
+libfdisk1:amd64
+libffi7:amd64
+libfido2-1:amd64
+libfl2:amd64
+libfreetype6:amd64
+libfuse2:amd64
+libgcc-s1:amd64
+libgcrypt20:amd64
+libgdbm-compat4:amd64
+libgdbm6:amd64
+libgirepository-1.0-1:amd64
+libglib2.0-0:amd64
+libglib2.0-data
+libgmp10:amd64
+libgnutls30:amd64
+libgpg-error0:amd64
+libgpm2:amd64
+libgssapi-krb5-2:amd64
+libgssapi3-heimdal:amd64
+libhcrypto4-heimdal:amd64
+libheimbase1-heimdal:amd64
+libheimntlm0-heimdal:amd64
+libhogweed5:amd64
+libhx509-5-heimdal:amd64
+libicu66:amd64
+libidn2-0:amd64
+libip4tc2:amd64
+libisc-export1105:amd64
+libisns0:amd64
+libjson-c4:amd64
+libk5crypto3:amd64
+libkeyutils1:amd64
+libklibc:amd64
+libkmod2:amd64
+libkrb5-26-heimdal:amd64
+libkrb5-3:amd64
+libkrb5support0:amd64
+libksba8:amd64
+libldap-2.4-2:amd64
+libldap-common
+liblocale-gettext-perl
+liblvm2cmd2.03:amd64
+liblz4-1:amd64
+liblzma5:amd64
+liblzo2-2:amd64
+libmnl0:amd64
+libmount1:amd64
+libmpdec2:amd64
+libmpfr6:amd64
+libncurses6:amd64
+libncursesw6:amd64
+libnetplan0:amd64
+libnettle7:amd64
+libnghttp2-14:amd64
+libnpth0:amd64
+libnss-systemd:amd64
+libp11-kit0:amd64
+libpackagekit-glib2-18:amd64
+libpam-cap:amd64
+libpam-modules:amd64
+libpam-modules-bin
+libpam-runtime
+libpam-systemd:amd64
+libpam0g:amd64
+libpcre2-8-0:amd64
+libpcre3:amd64
+libperl5.30:amd64
+libpng16-16:amd64
+libpolkit-gobject-1-0:amd64
+libpopt0:amd64
+libprocps8:amd64
+libproxy1v5:amd64
+libpsl5:amd64
+libpython3-stdlib:amd64
+libpython3.8-minimal:amd64
+libpython3.8-stdlib:amd64
+libreadline5:amd64
+libreadline8:amd64
+libroken18-heimdal:amd64
+librtmp1:amd64
+libsasl2-2:amd64
+libsasl2-modules:amd64
+libsasl2-modules-db:amd64
+libseccomp2:amd64
+libselinux1:amd64
+libsemanage-common
+libsemanage1:amd64
+libsepol1:amd64
+libsgutils2-2
+libsigsegv2:amd64
+libsmartcols1:amd64
+libsqlite3-0:amd64
+libss2:amd64
+libssh-4:amd64
+libssl1.1:amd64
+libstdc++6:amd64
+libsystemd0:amd64
+libtasn1-6:amd64
+libtinfo6:amd64
+libuchardet0:amd64
+libudev1:amd64
+libunistring2:amd64
+libuuid1:amd64
+libwind0-heimdal:amd64
+libwrap0:amd64
+libxtables12:amd64
+libyaml-0-2:amd64
+libzstd1:amd64
+linux-aws
+linux-aws-headers-5.4.0-1041
+linux-base
+linux-headers-5.4.0-1041-aws
+linux-headers-aws
+linux-image-5.4.0-1041-aws
+linux-image-aws
+linux-modules-5.4.0-1041-aws
+login
+logsave
+lsb-base
+lsb-release
+lvm2
+lxd-agent-loader
+lxd-installer
+lz4
+mawk
+mdadm
+microcode-initrd
+mime-support
+motd-news-config
+mount
+ncurses-base
+ncurses-bin
+netbase
+netplan.io
+networkd-dispatcher
+open-iscsi
+openssh-client
+openssh-server
+openssh-sftp-server
+openssl
+os-prober
+passwd
+patch
+perl
+perl-base
+perl-modules-5.30
+pinentry-curses
+pollinate
+procps
+python-apt-common
+python3
+python3-apport
+python3-apt
+python3-attr
+python3-blinker
+python3-certifi
+python3-cffi-backend
+python3-chardet
+python3-configobj
+python3-cryptography
+python3-dbus
+python3-debconf
+python3-debian
+python3-distro
+python3-distro-info
+python3-distupgrade
+python3-distutils
+python3-entrypoints
+python3-gi
+python3-httplib2
+python3-idna
+python3-importlib-metadata
+python3-jinja2
+python3-json-pointer
+python3-jsonpatch
+python3-jsonschema
+python3-jwt
+python3-keyring
+python3-launchpadlib
+python3-lazr.restfulclient
+python3-lazr.uri
+python3-lib2to3
+python3-markupsafe
+python3-minimal
+python3-more-itertools
+python3-netifaces
+python3-oauthlib
+python3-openssl
+python3-pexpect
+python3-pkg-resources
+python3-problem-report
+python3-ptyprocess
+python3-pyrsistent:amd64
+python3-requests
+python3-requests-unixsocket
+python3-secretstorage
+python3-serial
+python3-setuptools
+python3-simplejson
+python3-six
+python3-systemd
+python3-update-manager
+python3-urllib3
+python3-wadllib
+python3-yaml
+python3-zipp
+python3.8
+python3.8-minimal
+readline-common
+sbsigntool
+secureboot-db
+sed
+sensible-utils
+sg3-utils
+snapd
+sosreport
+sound-theme-freedesktop
+squashfs-tools
+ssh-import-id
+sudo
+systemd
+systemd-sysv
+systemd-timesyncd
+sysvinit-utils
+tar
+thin-provisioning-tools
+tpm-udev
+tzdata
+ubuntu-keyring
+ubuntu-release-upgrader-core
+ucf
+udev
+unattended-upgrades
+update-manager-core
+update-notifier-common
+util-linux
+wget
+xfsprogs
+xxd
+xz-utils
+zerofree
+zlib1g:amd64
+```
+
+And here is the full list of 92 packages in an ubuntu:20.04 docker image:
+```
+adduser
+apt
+base-files
+base-passwd
+bash
+bsdutils
+bzip2
+coreutils
+dash
+debconf
+debianutils
+diffutils
+dpkg
+e2fsprogs
+fdisk
+findutils
+gcc-10-base:amd64
+gpgv
+grep
+gzip
+hostname
+init-system-helpers
+libacl1:amd64
+libapt-pkg6.0:amd64
+libattr1:amd64
+libaudit-common
+libaudit1:amd64
+libblkid1:amd64
+libbz2-1.0:amd64
+libc-bin
+libc6:amd64
+libcap-ng0:amd64
+libcom-err2:amd64
+libcrypt1:amd64
+libdb5.3:amd64
+libdebconfclient0:amd64
+libext2fs2:amd64
+libfdisk1:amd64
+libffi7:amd64
+libgcc-s1:amd64
+libgcrypt20:amd64
+libgmp10:amd64
+libgnutls30:amd64
+libgpg-error0:amd64
+libhogweed5:amd64
+libidn2-0:amd64
+liblz4-1:amd64
+liblzma5:amd64
+libmount1:amd64
+libncurses6:amd64
+libncursesw6:amd64
+libnettle7:amd64
+libp11-kit0:amd64
+libpam-modules:amd64
+libpam-modules-bin
+libpam-runtime
+libpam0g:amd64
+libpcre2-8-0:amd64
+libpcre3:amd64
+libprocps8:amd64
+libseccomp2:amd64
+libselinux1:amd64
+libsemanage-common
+libsemanage1:amd64
+libsepol1:amd64
+libsmartcols1:amd64
+libss2:amd64
+libstdc++6:amd64
+libsystemd0:amd64
+libtasn1-6:amd64
+libtinfo6:amd64
+libudev1:amd64
+libunistring2:amd64
+libuuid1:amd64
+libzstd1:amd64
+login
+logsave
+lsb-base
+mawk
+mount
+ncurses-base
+ncurses-bin
+passwd
+perl-base
+procps
+sed
+sensible-utils
+sysvinit-utils
+tar
+ubuntu-keyring
+util-linux
+zlib1g:amd64
+```
+
