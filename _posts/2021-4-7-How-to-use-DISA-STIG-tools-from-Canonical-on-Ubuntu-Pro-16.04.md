@@ -45,6 +45,12 @@ fips-updates  yes       n/a       Uncertified security updates to FIPS modules
 livepatch     yes       enabled   Canonical Livepatch service
 ```
 
+**UPDATE 2021-04-08:** You might want to remove the ua-client PPA after installing the new UA tools packages, otherwise you might be pulling newer versions of the UA tools in the future that you might not really want:
+
+```console
+$ sudo add-apt-repository --remove ppa:ua-client/stable
+```
+
 For STIG, we need the usg-stig package, which is in the same repository as the CIS packages. So we'll need to enable CIS with the `--beta` flag (this only installs the repositories needed for the CIS tooling, it doesn't actually apply any kind of CIS configuration to the system):
 
 ```console

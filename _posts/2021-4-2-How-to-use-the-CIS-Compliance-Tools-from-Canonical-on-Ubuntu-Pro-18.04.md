@@ -27,6 +27,12 @@ $ ua version
 26.2~18.04.1
 ```
 
+**UPDATE 2021-04-08:** You might want to remove the ua-client PPA after installing the new UA tools packages, otherwise you might be pulling newer versions of the UA tools in the future that you might not really want: 
+
+```console
+$ sudo add-apt-repository --remove ppa:ua-client/stable
+```
+
 Once you have the UA client version 26.2 enabled, you can run ua status with the `--all` flag and see the cis feature:
 
 ```console
