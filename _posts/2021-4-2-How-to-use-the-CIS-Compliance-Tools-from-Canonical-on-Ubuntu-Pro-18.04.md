@@ -3,6 +3,8 @@ layout: post
 title: How to use the CIS Compliance Tools from Canonical on Ubuntu Pro 18.04
 ---
 
+**UPDATE 2021-04-20: Manually running the CIS scripts as described in that “Configure and run CIS Benchmark rule” section will have some challenges in cloud VMs. For example in Azure there are some problems with udf being disabled because some Azure integrations require it. Other issues can include not having various separate partitions, setting up a firewall and configuring SSH with a few more settings. Users will want to review each of the failures for their use case and decide which ones they can further fix.**
+
 Here’s a quick guide on how to use the CIS beta feature to enable the CIS compliance tools from Canonical on Ubuntu Pro 18.04.
 
 Ubuntu Pro on  [AWS](https://ubuntu.com/aws/pro)  and  [Azure](https://ubuntu.com/azure/pro)  (and now on  [Google Cloud](https://ubuntu.com/gcp/pro)  too!) comes with the Ubuntu Advantage client that allows users to enable features of  [Ubuntu Advantage](https://ubuntu.com/advantage).
@@ -66,6 +68,4 @@ ii  usg-common                             18.04.12                             
 ```
 
 And now you can proceed with the next steps from the “Configure and run CIS Benchmark rule” section of the Ubuntu’s documentation about  [CIS for Ubuntu 18.04 and Ubuntu 16.04](https://security-certs.docs.ubuntu.com/en/cis-18-16).
-
-**UPDATE 2021-04-20:** Manually running the CIS scripts as described in that “Configure and run CIS Benchmark rule” section will have some challenges in cloud VMs. For example in Azure there are some problems with udf being disabled because some Azure integrations require it. Other issues can include not having various separate partitions, setting up a firewall and configuring SSH with a few more settings. Users will want to review each of the failures for their use case and decide which ones they can further fix.
 
