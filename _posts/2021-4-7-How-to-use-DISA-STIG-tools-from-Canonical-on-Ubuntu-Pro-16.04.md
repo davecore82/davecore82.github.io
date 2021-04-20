@@ -7,7 +7,7 @@ Following up on my article [How to use the CIS Compliance Tools from Canonical o
 
 Security Technical Implementation Guides (STIG) are developed by the Defense Information System Agency (DISA) for the U.S. Department of Defense (DoD). They are configuration guidelines for hardening systems to improve security. They contain technical guidance which when implemented, locks down software and systems to mitigate malicious attacks.
 
-As of this writing, DISA has, in conjunction with Canonical, developed STIGs for Ubuntu 16.04 LTS and Ubuntu 18.04 LTS. However Canonical currently only has audit tooling for STIG on Ubuntu 16.04.
+As of this writing, DISA has, in conjunction with Canonical, developed STIGs for Ubuntu 16.04 LTS and Ubuntu 18.04 LTS. However Canonical currently only has audit tooling for STIG on Ubuntu 16.04 **(no hardening scripts, only auditing)**.
 
 Ubuntu Pro on  [AWS](https://ubuntu.com/aws/pro)  and  [Azure](https://ubuntu.com/azure/pro)  (and now on  [Google Cloud](https://ubuntu.com/gcp/pro)  too!) comes with the Ubuntu Advantage client that allows users to enable features of  [Ubuntu Advantage](https://ubuntu.com/advantage).
 
