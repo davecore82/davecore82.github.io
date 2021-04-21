@@ -5,6 +5,8 @@ title: How to build FIPS containers on Ubuntu Pro 18.04
 
 This article gives an example of how to build FIPS containers on Ubuntu Pro 18.04. There are probably other ways to do this but this is one way that doesn't require an Ubuntu Advantage token from Canonical. Instead we'll use the FIPS repository already enabled in Ubuntu Pro FIPS 18.04 to build the container.
 
+**UPDATE 2021-04-21: A more [official version of this article](https://ubuntu.com/blog/building-and-running-fips-containers-on-ubuntu%09Security) has been published on the Ubuntu blog**
+
 Some of these steps could probably be simplified (ie. having to copy the deb packages manually inside the container at build time), but [this bug](https://github.com/canonical/ubuntu-advantage-client/issues/1441) seems to be causing issues with this automation. I think one way to simplify this is if we were able to run `ua auto-attach` inside the container and be able to install the FIPS packages more easily without having to download and copy each deb package manually like we're doing in this article.
 
 Anyway! First, you'll want to start with an Ubuntu Pro **FIPS** 18.04 image on the public clouds. This is not the standard Ubuntu Pro 18.04 image, but the FIPS version of it that already comes with FIPS enabled out of the box (for example this [FIPS image on Azure](https://azuremarketplace.microsoft.com/en-ca/marketplace/apps/canonical.0001-com-ubuntu-pro-bionic-fips?tab=overview)). 
