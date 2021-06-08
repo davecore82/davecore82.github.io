@@ -4,5 +4,5 @@ title: About
 permalink: /about/
 ---
 
-Field Engineering @Canonical. he/him. Opinions are my own and not the views of my employer. #ubuntu #kubernetes #cloud
+Azure Cloud Consultant @Microsoft. he/him. #azure #ubuntu #kubernetes. Opinions are my own and not the views of my employer.
 
