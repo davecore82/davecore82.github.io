@@ -4,5 +4,5 @@ title: About
 permalink: /about/
 ---
 
-Azure Cloud Consultant @Microsoft. he/him. #azure #ubuntu #kubernetes. Opinions are my own and not the views of my employer.
+Openshift Technical Account Manager at RedHat. he/him. #openshift #kubernetes. Opinions are my own and not the views of my employer.
 
